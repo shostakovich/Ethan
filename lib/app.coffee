@@ -6,20 +6,20 @@ if (argv.length != 4)
     sys.puts('Usage: coffee app.coffee <my-jid> <my-password>')
     process.exit(1)
 
-Notification = require("./Notification").Notification;
-DailyNotification = require("./Notification").DailyNotification;
+Notification = require("./Notification").Notification
+DailyNotification = require("./Notification").DailyNotification
 
-NotificationManager = require("./Notification").NotificationManager;
-Notifier = require("./Notification").Notifier;
+NotificationManager = require("./Notification").NotificationManager
+Notifier = require("./Notification").Notifier
 XmppHelper = require("./XmppHelper").XmppHelper
-CommandParser = require("./CommandParser").CommandParser;
+CommandParser = require("./CommandParser").CommandParser
 
 cl = new xmpp.Client { jid: argv[2], password: argv[3] }
 
 notifier = new Notifier( cl )
 
 manager = new NotificationManager(notifier)
-manager.addNotification(new DailyNotification "Standup Meeting", "18:02")
+manager.addNotification(new DailyNotification "Standup Meeting", "19:11")
 
 setInterval () ->
 	manager.try_notify()
