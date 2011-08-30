@@ -66,7 +66,7 @@ class Notifier
 	
 	send_message: (recipient, message) ->
 		console.log("Sending message #{message} to #{recipient}")
-		@client.send(new xmpp.Element('message', { to: recipient, type: 'chat'}). 
+		@client.send(new xmpp.Element('message', { to: recipient, type: 'chat'}).
 			c('body').
 			t(message))
 		

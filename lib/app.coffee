@@ -16,7 +16,7 @@ CommandParser = require("./CommandParser").CommandParser
 
 cl = new xmpp.Client { jid: argv[2], password: argv[3] }
 
-notifier = new Notifier( cl )
+notifier = new Notifier( cl  )
 
 manager = new NotificationManager(notifier)
 manager.addNotification(new DailyNotification "Standup Meeting", "19:11")

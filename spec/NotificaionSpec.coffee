@@ -1,6 +1,6 @@
-Notification = require("../lib/Notification").Notification;
-NotificationManager = require("../lib/Notification").NotificationManager;
-DailyNotification = require("../lib/Notification").DailyNotification;
+Notification = require("../lib/Notification").Notification
+NotificationManager = require("../lib/Notification").NotificationManager
+DailyNotification = require("../lib/Notification").DailyNotification
 
 describe 'NotificaionManager', ->
 	it 'should contain one or more notificaions', ->
