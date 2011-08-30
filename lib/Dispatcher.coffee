@@ -8,6 +8,9 @@ class Dispatcher
   register_action: (action) ->
     @actions.push action
 
-  dispatch: (command) ->
+  dispatch: (action_name, args=[]) ->
+    for action in @actions
+      return action.execute(args) if action.name is action_name
+    throw "Action was not registered"
 
 module.exports = {Dispatcher: Dispatcher}

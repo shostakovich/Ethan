@@ -1,6 +1,5 @@
 Dispatcher = require("../lib/Dispatcher").Dispatcher
-
-class HelpAction
+HelpAction = require("../lib/HelpAction").HelpAction
 
 describe 'Dispatcher', ->
 
@@ -12,11 +11,21 @@ describe 'Dispatcher', ->
     d.actions
     expect(d.actions.length).toEqual 1
 
-
   it 'executes the right action', ->
     d = new Dispatcher
 
     h = new HelpAction
     d.register_action h
 
-    d.dispatch ["Help"]
+    spyOn(h, 'execute')
+    d.dispatch "Help"
+    expect(h.execute).toHaveBeenCalledWith([])
+
+  it 'throws an exception if action does not exist', ->
+    d = new Dispatcher
+    try
+      d.dispatch "Foobar"
+      expect(true).toEqual false
+    catch error
+      expect(error).toEqual "Action was not registered"
+
