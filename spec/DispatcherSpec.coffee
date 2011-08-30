@@ -29,3 +29,13 @@ describe 'Dispatcher', ->
     catch error
       expect(error).toEqual "Action was not registered"
 
+  it 'dispatches a command to the proper action', ->
+    d = new Dispatcher
+
+    h = new HelpAction
+    d.register_action h
+
+    spyOn(h, 'execute')
+    d.execute_command 'help'
+    expect(h.execute).toHaveBeenCalledWith([])
+

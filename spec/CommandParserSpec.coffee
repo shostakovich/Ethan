@@ -12,7 +12,7 @@ describe 'CommandParser', ->
 
   it 'should parse a help command', ->
     parser = new CommandParser
-    expect(parser.parse "help").toEqual ["ShowHelp"]
+    expect(parser.parse "help").toEqual ["Help"]
 
   it 'should return undefined on an unknown command', ->
     parser = new CommandParser
