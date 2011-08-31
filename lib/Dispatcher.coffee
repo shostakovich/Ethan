@@ -3,20 +3,21 @@ CommandParser = require("../lib/CommandParser").CommandParser
 class Dispatcher
   constructor: ->
     @parser = new CommandParser
-    @actions = []
+    @controllers = []
 
-  register_action: (action) ->
-    @actions.push action
+  register_controller: (controller) ->
+    @controllers.push controller
 
-  dispatch: (action_name, args=[]) ->
-    for action in @actions
-      return action.execute(args) if action.name is action_name
-    throw "Action was not registered"
+  dispatch: (controller_name, action_name="execute", args=[]) ->
+    action_name = "execute#{action_name}" if action_name != "execute"
+    for controller in @controllers
+      return eval "controller.#{action_name}(args)" if controller.name is controller_name
+    throw "Controller was not registered"
 
   execute_command: (command) ->
     parts = @parser.parse command
     try
-      @dispatch(parts[0])
+      @dispatch(parts[0], parts[1])
     catch error
       "I did not understand this command"
 

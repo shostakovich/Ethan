@@ -9,7 +9,8 @@ if (argv.length != 4)
 Notifier = require("./Notification").Notifier
 XmppHelper = require("./XmppHelper").XmppHelper
 Dispatcher = require("./Dispatcher").Dispatcher
-HelpAction = require("./HelpAction").HelpAction
+HelpController = require("./HelpController").HelpController
+NotificationController = require("./NotificationController").NotificationController
 
 cl = new xmpp.Client { jid: argv[2], password: argv[3] }
 
@@ -23,7 +24,9 @@ cl.on 'stanza', (stanza) ->
 	recipient = stanza.attrs.from
 
 	dispatcher = new Dispatcher
-	dispatcher.register_action(new HelpAction)
+	dispatcher.register_controller(new HelpController)
+  dispatcher.register_controller(new NotifcationControllers)
+
 
 	response = dispatcher.execute_command(body)
 	return notifier.send_message recipient, response

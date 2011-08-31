@@ -1,19 +1,17 @@
 CommandParser = require("../lib/CommandParser").CommandParser;
 
 describe 'CommandParser', ->
+  beforeEach ->
+    @parser = new CommandParser
 
   it 'should parse a add user command', ->
-    parser = new CommandParser
-    expect(parser.parse "Add test@test.de as a new teammember").toEqual ["AddUser"]
+    expect(@parser.parse "Add test@test.de as a new teammember").toEqual ["AddUser"]
 
   it 'should parse a subscribe command', ->
-    parser = new CommandParser
-    expect(parser.parse "Notify me about Standup Meeting").toEqual ["AddNotification", "Standup Meeting"]
+    expect(@parser.parse "Notify me about Standup Meeting").toEqual ["Notification", "AddStandup"]
 
   it 'should parse a help command', ->
-    parser = new CommandParser
-    expect(parser.parse "help").toEqual ["Help"]
+    expect(@parser.parse "help").toEqual ["Help"]
 
   it 'should return undefined on an unknown command', ->
-    parser = new CommandParser
-    expect(parser.parse "Lorem ipsum dolor").toEqual undefined
+    expect(@parser.parse "Lorem ipsum dolor").toEqual undefined

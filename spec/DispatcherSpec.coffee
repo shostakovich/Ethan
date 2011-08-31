@@ -1,41 +1,48 @@
 Dispatcher = require("../lib/Dispatcher").Dispatcher
-HelpAction = require("../lib/HelpAction").HelpAction
+HelpController = require("../lib/HelpController").HelpController
+NotificationController = require("../lib/NotificationController").NotificationController
 
 describe 'Dispatcher', ->
+  beforeEach ->
+    @d = new Dispatcher
 
-  it 'allows to register one ore more actions', ->
-    d = new Dispatcher
-    h = new HelpAction
-    d.register_action h
+  it 'allows to register one ore more controllers', ->
+    c = new HelpController
+    @d.register_controller c
 
-    d.actions
-    expect(d.actions.length).toEqual 1
+    c = new NotificationController
+    @d.register_controller c
 
-  it 'executes the right action', ->
-    d = new Dispatcher
+    expect(@d.controllers.length).toEqual 2
 
-    h = new HelpAction
-    d.register_action h
+  it 'executes the right controller', ->
+    h = new HelpController
+    @d.register_controller h
 
     spyOn(h, 'execute')
-    d.dispatch "Help"
+    @d.dispatch "Help"
     expect(h.execute).toHaveBeenCalledWith([])
 
-  it 'throws an exception if action does not exist', ->
-    d = new Dispatcher
+  it 'passes additional parameters to the action', ->
+    n = new NotificationController
+    @d.register_controller n
+
+    spyOn(n, 'executeAddStandup')
+    @d.dispatch "Notification", "AddStandup"
+    expect(n.executeAddStandup).toHaveBeenCalledWith([])
+
+  it 'throws an exception if controller does not exist', ->
     try
-      d.dispatch "Foobar"
+      @d.dispatch "Foobar"
       expect(true).toEqual false
     catch error
-      expect(error).toEqual "Action was not registered"
+      expect(error).toEqual "Controller was not registered"
 
-  it 'dispatches a command to the proper action', ->
-    d = new Dispatcher
-
-    h = new HelpAction
-    d.register_action h
+  it 'dispatches a command to the proper controller and action', ->
+    h = new HelpController
+    @d.register_controller h
 
     spyOn(h, 'execute')
-    d.execute_command 'help'
+    @d.execute_command 'help'
     expect(h.execute).toHaveBeenCalledWith([])
 

@@ -1,8 +1,8 @@
 class CommandParser
 
 	parse: (command) ->
-		matches = command.match /Notify me about (.*)/
-		return ["AddNotification", matches[1]] if matches
+		matches = command.match /Notify me about Standup Meeting/
+		return ["Notification", "AddStandup"] if matches
 		
 		matches = command.match /help/
 		return ["Help"] if matches

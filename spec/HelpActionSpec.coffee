@@ -1,12 +1,12 @@
-HelpAction = require("../lib/HelpAction").HelpAction
+HelpController = require("../lib/HelpController").HelpController
 
-describe 'HelpAction', ->
+describe 'HelpController', ->
 
   it 'should have the name "Help"', ->
-    h = new HelpAction
+    h = new HelpController
     expect(h.name).toEqual "Help"
 
   it 'should return a simple help text', ->
-    h = new HelpAction
+    h = new HelpController
     expect(h.execute()).toEqual "Type: Notify me about Standup Meeting"
 
