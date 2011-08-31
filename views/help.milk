@@ -1,0 +1,11 @@
+My name is ethan. I am a robotic butler that assists scrum-teams.
+
+Commands:
+=========
+
+NOTIFICATION (help notification)
+
+* Subscribe    Notify me about name_of_notificaion
+* Unsubscribe  Do not notify me about name_of_notificaion
+
+GLOBAL HELP (help)

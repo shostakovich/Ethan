@@ -8,5 +8,4 @@ describe 'HelpController', ->
 
   it 'should return a simple help text', ->
     h = new HelpController
-    expect(h.execute()).toEqual "Type: Notify me about Standup Meeting"
-
+    expect(h.execute()).toMatch "My name is ethan"

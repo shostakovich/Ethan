@@ -16,17 +16,15 @@ cl = new xmpp.Client { jid: argv[2], password: argv[3] }
 
 notifier = new Notifier( cl  )
 helper = new XmppHelper
+dispatcher = new Dispatcher
+dispatcher.register_controller(new HelpController)
+dispatcher.register_controller(new NotificationController)
 
 cl.on 'stanza', (stanza) ->
 	body = helper.get_stanza_message(stanza)
 	return if body == undefined
 				
 	recipient = stanza.attrs.from
-
-	dispatcher = new Dispatcher
-	dispatcher.register_controller(new HelpController)
-  dispatcher.register_controller(new NotifcationControllers)
-
 
 	response = dispatcher.execute_command(body)
 	return notifier.send_message recipient, response
