@@ -1,9 +1,7 @@
-Milk = require 'Milk'
-fs = require 'fs'
-
+Controller = require("./Controller").Controller
 DailyNotification = require("./Notification").DailyNotification
 
-class NotificationController
+class NotificationController extends Controller
   constructor: ->
     @name = "Notification"
 
@@ -12,7 +10,6 @@ class NotificationController
       @notification = new DailyNotification "Standup Meeting", "11:43"
     @notification.subscribe subscriber
 
-    template = fs.readFileSync('./views/standup_notification.milk', 'utf8')
-    Milk.render template, {notification: @notification}
+    @render "standup_notification", @notification
 
 module.exports = {NotificationController: NotificationController}

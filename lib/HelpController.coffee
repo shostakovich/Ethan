@@ -1,12 +1,10 @@
-Milk = require 'Milk'
-fs = require 'fs'
+Controller = require("./Controller").Controller
 
-class HelpController
+class HelpController extends Controller
   constructor: ->
     @name = "Help"
 
   execute: (args)->
-    template = fs.readFileSync('./views/help.milk', 'utf8')
-    Milk.render template
+    @render "help"
 
 module.exports = {HelpController: HelpController}

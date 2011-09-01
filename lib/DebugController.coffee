@@ -1,14 +1,14 @@
-Milk = require 'Milk'
+Controller = require("./Controller").Controller
 os = require 'os'
 fs = require 'fs'
 
-class DebugController
+class DebugController extends Controller
   constructor: ->
     @name = "Debug"
 
   execute: (args)->
-    template = fs.readFileSync('./views/debug.milk', 'utf8')
-    Milk.render template, @get_debug_parameter()
+    @render "debug", @get_debug_parameter()
+
 
   get_debug_parameter: ->
     {
