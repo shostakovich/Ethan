@@ -10,6 +10,7 @@ Notifier = require("./Notification").Notifier
 XmppHelper = require("./XmppHelper").XmppHelper
 Dispatcher = require("./Dispatcher").Dispatcher
 HelpController = require("./HelpController").HelpController
+DebugController = require("./DebugController").DebugController
 NotificationController = require("./NotificationController").NotificationController
 
 cl = new xmpp.Client { jid: argv[2], password: argv[3] }
@@ -19,6 +20,7 @@ helper = new XmppHelper
 dispatcher = new Dispatcher
 dispatcher.register_controller(new HelpController)
 dispatcher.register_controller(new NotificationController)
+dispatcher.register_controller(new DebugController)
 
 cl.on 'stanza', (stanza) ->
 	body = helper.get_stanza_message(stanza)

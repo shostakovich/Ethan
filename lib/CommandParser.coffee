@@ -9,5 +9,8 @@ class CommandParser
 
 		matches = command.match /Add (.*) as a new teammember/
 		return ["AddUser"] if matches
+
+		matches = command.match /What's wrong with you Ethan?/
+		return ["Debug"] if matches
 		
 module.exports = {CommandParser: CommandParser}

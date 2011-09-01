@@ -20,16 +20,16 @@ describe 'Dispatcher', ->
     @d.register_controller h
 
     spyOn(h, 'execute')
-    @d.dispatch "Help"
-    expect(h.execute).toHaveBeenCalledWith([])
+    @d.dispatch "Help", "execute", "rocurth@googlemail.com/Adium0B1A6BFA"
+    expect(h.execute).toHaveBeenCalledWith("rocurth@googlemail.com/Adium0B1A6BFA")
 
   it 'passes additional parameters to the action', ->
     n = new NotificationController
     @d.register_controller n
 
     spyOn(n, 'executeAddStandup')
-    @d.dispatch "Notification", "AddStandup"
-    expect(n.executeAddStandup).toHaveBeenCalledWith([])
+    @d.dispatch "Notification", "AddStandup", "rocurth@googlemail.com/Adium0B1A6BFA"
+    expect(n.executeAddStandup).toHaveBeenCalledWith("rocurth@googlemail.com/Adium0B1A6BFA")
 
   it 'throws an exception if controller does not exist', ->
     try
@@ -43,6 +43,6 @@ describe 'Dispatcher', ->
     @d.register_controller h
 
     spyOn(h, 'execute')
-    @d.execute_command 'help'
-    expect(h.execute).toHaveBeenCalledWith([])
+    @d.execute_command 'help', "rocurth@googlemail.com/Adium0B1A6BFA"
+    expect(h.execute).toHaveBeenCalledWith("rocurth@googlemail.com/Adium0B1A6BFA")
 

@@ -1,0 +1,9 @@
+Debug Informations:
+===================
+
+Hostname: {{hostname}}
+OS: {{os_name}}/{{os_release}}
+Load Average: {{load_avg}}
+
+Nodejs Version: {{node_version}}
+Memory Usage: {{node_memory_usage.rss}}

@@ -9,3 +9,6 @@ NOTIFICATION (help notification)
 * Unsubscribe  Do not notify me about name_of_notificaion
 
 GLOBAL HELP (help)
+
+DEBUG (help debug)
+* List of debug info  Whats wrong with you Ethan?

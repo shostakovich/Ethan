@@ -25,7 +25,7 @@ describe 'NotificaionManager', ->
       expect(true).toEqual true
 
 describe 'DailyNotification', ->
-	
+
 	it 'should have a time', ->
 		n = new DailyNotification "Standup", "09:45"
 		expect(n.time).toEqual "09:45"

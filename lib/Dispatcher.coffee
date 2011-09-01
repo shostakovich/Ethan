@@ -14,10 +14,10 @@ class Dispatcher
       return eval "controller.#{action_name}(args)" if controller.name is controller_name
     throw "Controller was not registered"
 
-  execute_command: (command) ->
+  execute_command: (command, recipient) ->
     parts = @parser.parse command
     try
-      @dispatch(parts[0], parts[1])
+      @dispatch(parts[0], parts[1], recipient)
     catch error
       "I did not understand this command"
 
