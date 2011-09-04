@@ -7,7 +7,7 @@ class NotificationController extends Controller
 
   executeAddStandup: (subscriber)->
     if undefined == @notification
-      @notification = new DailyNotification "Standup Meeting", "11:43"
+      @notification = new DailyNotification "Standup Meeting", "11:43", false
     @notification.subscribe subscriber
 
     @render "standup_notification", @notification

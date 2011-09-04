@@ -1,45 +1,40 @@
 xmpp = require 'node-xmpp'
-
-class NotificationManager
-	constructor: (@notifier) ->
-		@notifications = []
-		
-	addNotification: (notification) ->
-		@notifications.push notification
-		
-	subscribe: (user, notification_name) ->
-		for n in @notifications
-			return n.subscribe user if n.name == notification_name
-		throw new Exception "This Notificaion does not exist"
-		
-	try_notify: ->
-		for notification in @notifications
-			notification.send_if_necessary(@notifier)
+fs = require 'fs'
 
 class Notification
 	
-	constructor: (@name) ->
+	constructor: (@name, @access_db = true) ->
 		@subscribers = []
+		@load_subscribers() if @access_db
 	
 	subscribe: (address) ->
 		unless address in @subscribers
 			@subscribers.push address
+			@save_subscribers()  if @access_db
 		
 	unsubscribe: (address) ->
 		if address in @subscribers
 			idx = @subscribers.indexOf address
 			@subscribers.splice idx, 1
-			
+
+	save_subscribers: ->
+	  fs.writeFileSync "./db/subscribers_#{@name}.txt", JSON.stringify(@subscribers), 'utf8'
+
+	load_subscribers: ->
+	  data = fs.readFileSync "./db/subscribers_#{@name}.txt", 'utf8'
+	  @subscribers = JSON.parse data if data.length != 0
+
 class DailyNotification extends Notification
-	constructor: (@name, @time) ->
+	constructor: (@name, @time, @access_db=true) ->
 		@subscribers = []
+		@load_subscribers() if @access_db
 		@next_notificaion = ""
 		this.get_next_notifiacion_time()
-	
+
 	get_next_notifiacion_time: ->
 		matches = @time.match /([0-2][0-9]):([0-5][0-9])/
 		now = new Date
-		
+
 		@next_notificaion = now
 		@next_notificaion.setHours(matches[1])
 		@next_notificaion.setMinutes(matches[2])
@@ -71,4 +66,4 @@ class Notifier
 			t(message))
 		
 
-module.exports = {Notification: Notification, NotificationManager: NotificationManager, Notifier: Notifier, DailyNotification, DailyNotification} 
+module.exports = {Notification: Notification, Notifier: Notifier, DailyNotification, DailyNotification}

@@ -28,7 +28,7 @@ cl.on 'stanza', (stanza) ->
 				
 	recipient = stanza.attrs.from
 
-	response = dispatcher.execute_command(body)
+	response = dispatcher.execute_command(body, recipient)
 	return notifier.send_message recipient, response
 
 cl.on 'online', () ->
