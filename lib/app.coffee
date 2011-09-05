@@ -19,8 +19,16 @@ notifier = new Notifier( cl  )
 helper = new XmppHelper
 dispatcher = new Dispatcher
 dispatcher.register_controller(new HelpController)
-dispatcher.register_controller(new NotificationController)
 dispatcher.register_controller(new DebugController)
+
+notification_controller = new NotificationController
+dispatcher.register_controller(notification_controller)
+
+setInterval(
+  ->
+    notification_controller.send_notifications(notifier)
+  1000)
+
 
 cl.on 'stanza', (stanza) ->
 	body = helper.get_stanza_message(stanza)

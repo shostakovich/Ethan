@@ -1,7 +1,7 @@
 class CommandParser
 
 	parse: (command) ->
-		matches = command.match /Notify me about Standup Meeting/
+		matches = command.match /subscribe: Standup/
 		return ["Notification", "AddStandup"] if matches
 		
 		matches = command.match /help/
@@ -10,7 +10,7 @@ class CommandParser
 		matches = command.match /Add (.*) as a new teammember/
 		return ["AddUser"] if matches
 
-		matches = command.match /What's wrong with you Ethan?/
+		matches = command.match /debug/
 		return ["Debug"] if matches
 		
 module.exports = {CommandParser: CommandParser}

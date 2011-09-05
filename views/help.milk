@@ -5,10 +5,10 @@ Commands:
 
 NOTIFICATION (help notification)
 
-* Subscribe    Notify me about name_of_notificaion
-* Unsubscribe  Do not notify me about name_of_notificaion
+* subscribe    subscribe: Standup
+* unsubscribe  unsubscribe: Standup
 
 GLOBAL HELP (help)
 
 DEBUG (help debug)
-* List of debug info  Whats wrong with you Ethan?
+* debug
